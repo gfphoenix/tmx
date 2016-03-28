@@ -27,6 +27,15 @@ func TestDecode(t *testing.T) {
 	}
 }
 
+func TestBadDecode(t *testing.T) {
+	for i, s := range []string{ testBadCsv } {
+		_, err := Decode(strings.NewReader(s))
+		if err == nil {
+			t.Fatalf("expected decode error for %d, got: %v", i, err)
+		}
+	}
+}
+
 var testXml = `
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="10" height="10" tilewidth="16" tileheight="16">
@@ -166,6 +175,42 @@ var testCsv = `
 1,1,3,3,2,2,3,3,1,1,
 1,1,3,2,2,2,2,3,1,1,
 1,1,3,3,2,2,2,3,1,1,
+1,1,3,3,3,2,2,3,1,1,
+1,1,3,3,3,3,3,3,3,1,
+3,1,1,3,3,3,3,3,3,1,
+3,1,1,1,1,1,3,3,1,1,
+3,3,1,1,1,1,1,1,1,3
+</data>
+ </layer>
+ <objectgroup name="Mountains" width="10" height="10">
+  <object type="mountain" x="48" y="48" width="16" height="16"/>
+  <object type="mountain" x="64" y="32" width="16" height="16"/>
+  <object type="mountain" x="80" y="32" width="16" height="16"/>
+  <object type="mountain" x="64" y="48" width="16" height="16"/>
+  <object type="mountain" x="96" y="48" width="16" height="16"/>
+  <object type="mountain" x="80" y="48" width="16" height="16"/>
+  <object type="mountain" x="64" y="64" width="16" height="16"/>
+  <object type="mountain" x="80" y="64" width="16" height="16"/>
+  <object type="mountain" x="96" y="64" width="16" height="16"/>
+  <object type="mountain" x="80" y="80" width="16" height="16"/>
+  <object type="mountain" x="96" y="80" width="16" height="16"/>
+ </objectgroup>
+</map>
+`
+
+var testBadCsv = `
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="10" height="10" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="land" tilewidth="16" tileheight="16">
+  <image source="tiles.png" width="48" height="16"/>
+ </tileset>
+ <layer name="Foreground" width="10" height="10">
+  <data encoding="csv">
+3,3,1,1,1,1,1,1,1,3,
+3,1,1,3,3,3,3,1,1,1,
+1,1,3,3,2,2,3,3,1,1,
+1,1,3,2,2,2,2,3,1,1,
+1,1,3,3,2,x,2,3,1,1,
 1,1,3,3,3,2,2,3,1,1,
 1,1,3,3,3,3,3,3,3,1,
 3,1,1,3,3,3,3,3,3,1,
