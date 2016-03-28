@@ -130,9 +130,6 @@ func (l *Layer) decodeIDs() error {
 				l.GIDs = append(l.GIDs, int32(n))
 			}
 		}
-		if err := r.Err(); err != nil {
-			return err
-		}
 	} else if d.Encoding == "base64" {
 		raw, err := base64.StdEncoding.DecodeString(strings.TrimSpace(d.Text))
 		if err != nil {
