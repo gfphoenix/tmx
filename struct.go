@@ -2,7 +2,7 @@
 
 /*
 Package tmx provides a struct for parsing the Tiled map editor's TMX map format. See
-https://github.com/bjorn/tiled/wiki/TMX-Map-Format .
+http://doc.mapeditor.org/reference/tmx-map-format/ .
 */
 package tmx
 
